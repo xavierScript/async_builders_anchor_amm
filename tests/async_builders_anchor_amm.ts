@@ -91,7 +91,7 @@ describe("async_builders_anchor_amm", () => {
     userY = userYAccount.address;
 
     // Mint tokens to user
-    const amountToMint = 1_000_000_000; // 1000 tokens (with 6 decimals)
+    const amountToMint = 1_000_000_000;
     await mintTo(
       provider.connection,
       user.payer,
@@ -143,9 +143,9 @@ describe("async_builders_anchor_amm", () => {
 
   it("Deposit liquidity to pool", async () => {
     // Deposit liquidity
-    const depositAmount = new BN(100_000_000); // 100 LP tokens
-    const maxX = new BN(500_000_000); // Max 500 X tokens
-    const maxY = new BN(500_000_000); // Max 500 Y tokens
+    const depositAmount = new BN(100_000_000);
+    const maxX = new BN(500_000_000);
+    const maxY = new BN(500_000_000);
 
     const tx = await program.methods
       .deposit(depositAmount, maxX, maxY)
@@ -200,11 +200,11 @@ describe("async_builders_anchor_amm", () => {
     console.log("  Vault Y:", vaultYBefore.amount.toString());
 
     // Swap X for Y
-    const swapAmount = new BN(10_000_000); // Swap 10 X tokens
-    const minOut = new BN(1); // Minimum output (accept any amount for test)
+    const swapAmount = new BN(10_000_000);
+    const minOut = new BN(1);
 
     const tx = await program.methods
-      .swap(true, swapAmount, minOut) // true = swapping X for Y
+      .swap(true, swapAmount, minOut)
       .accountsPartial({
         user: user.publicKey,
         mintX: mintX,
@@ -276,8 +276,8 @@ describe("async_builders_anchor_amm", () => {
 
     // Withdraw half of LP tokens
     const withdrawAmount = new BN(lpBalance.amount.toString()).div(new BN(2));
-    const minX = new BN(1); // Minimum X to receive
-    const minY = new BN(1); // Minimum Y to receive
+    const minX = new BN(1);
+    const minY = new BN(1);
 
     const tx = await program.methods
       .withdraw(withdrawAmount, minX, minY)
